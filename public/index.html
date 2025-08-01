@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parcel Notification System: Webhook to Real-Time App Update</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Parcel Notification System: Webhook to Real-Time App Update</h1>
+  <p class="sub">The System triggers an event and sends a webhook (HTTP POST request) to the Webhook Endpoint. The Webhook Endpoint processes the payload and pushes a translated notification to the User App via WebSocket in real time.</p>
+
+  <div class="flow-container">
+    <div class="box server">
+      <h2>System</h2>
+      <select id="message-select">
+        <option value="READY_FOR_SHIPPING">READY_FOR_SHIPPING</option>
+        <option value="PICKED_UP_BY_COURIER">PICKED_UP_BY_COURIER</option>
+        <option value="ARRIVED_AT_HUB">ARRIVED_AT_HUB</option>
+        <option value="DELIVERED_SUCCESSFULLY">DELIVERED_SUCCESSFULLY</option>
+        <option value="DELIVERY_FAILED">DELIVERY_FAILED</option>
+      </select>
+      <button id="send-btn">Send Webhook</button>
+    </div>
+
+    <div class="box webhook">
+      <h2>Webhook Endpoint</h2>
+      <ul id="webhook-log"></ul>
+    </div>
+
+    <div class="box phone">
+      <h2>User Phone App</h2>
+      <ul id="push-log"></ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
