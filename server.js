@@ -1,25 +1,29 @@
 // Webhook simulation project using Node.js, Express, Socket.io
+
 const express = require('express');
-const socketIo = require('socket.io');
 const http = require('http');
+const socketIo = require('socket.io');
 const bodyParser = require('body-parser');
 const path = require('path');
-const fetch = require('node-fetch');
 
 const app = express();
-const server = http.createServer(app);
+// Need to create HTTP server to use with Socket.io
+// this is necessary to handle HTTP requests and WebSocket connections
+const server = http.createServer(app);   
 const io = socketIo(server);
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // Webhook Receiver endpoint
 app.post('/webhook', (req, res) => {
   const message = req.body.message;
+  if (!message || typeof message !== 'string') {
+    console.log('Invalid webhook payload:', req.body);
+    return res.status(400).json({ error: 'Invalid payload.' });
+  }
   console.log('Webhook received:', message);
-  // Emit the message to user interface
+  // Emit to user interface
   io.emit('push-message', message);
   res.sendStatus(200);
 });
@@ -27,7 +31,6 @@ app.post('/webhook', (req, res) => {
 
 
 // Webhook Sender endpoint
-// Simulates sending a webhook from the server
 app.get('/send-webhook/:msg', async (req, res) => {
   const message = req.params.msg;
 
