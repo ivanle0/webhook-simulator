@@ -7,7 +7,11 @@
 </head>
 <body>
   <h1>Parcel Notification System: Webhook to Real-Time App Update</h1>
-  <p class="sub">The System triggers an event and sends a webhook (HTTP POST request) to the Webhook Endpoint. The Webhook Endpoint processes the payload and pushes a translated notification to the User App via WebSocket in real time.</p>
+  <ol class="sub">
+    <li>The system sends a Webhook (HTTP POST request) to the endpoint.</li> 
+    <li>The endpoint receives the Webhook and processes the payload.</li> 
+    <li>The endpoint pushes a real-time notification to the User App via WebSocket.</li>
+  </ol>
 
   <div class="flow-container">
     <div class="box server">
@@ -16,7 +20,7 @@
         <option value="READY_FOR_SHIPPING">READY_FOR_SHIPPING</option>
         <option value="PICKED_UP_BY_COURIER">PICKED_UP_BY_COURIER</option>
         <option value="ARRIVED_AT_HUB">ARRIVED_AT_HUB</option>
-        <option value="DELIVERED_SUCCESSFULLY">DELIVERED_SUCCESSFULLY</option>
+        <option value="DELIVERED">DELIVERED</option>
         <option value="DELIVERY_FAILED">DELIVERY_FAILED</option>
       </select>
       <button id="send-btn">Send Webhook</button>
@@ -33,6 +37,7 @@
     </div>
   </div>
 
+  <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
